@@ -1,5 +1,7 @@
 const express = require('express');
 
+const Todo = require('../models/todoModel.js');
+
 // Creating a router
 const router = express.Router();
 
@@ -16,8 +18,16 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a new todo
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new todo'});
+router.post('/', async (req, res) => {
+    const {title, description, completed} = req.body
+
+    try {
+        const todo = await Todo.create({title, description, completed})
+        res.status(200).json(todo)
+    } catch (error) {
+        res.status(400).json({error: error.mssg})
+    }
+    // res.json({mssg: 'POST a new todo'});
 });
 
 // DELETE a todo
