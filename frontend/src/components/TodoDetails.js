@@ -1,6 +1,9 @@
 import React from 'react'
 import { useTodosContext } from '../hooks/useTodosContext'
 
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 const TodoDetails = ({todo}) => {
   const { dispatch } = useTodosContext()
 
@@ -19,7 +22,7 @@ const TodoDetails = ({todo}) => {
         <h4>{todo.title}</h4>
         <p>{todo.description}</p>
         {/* <button type='radio'>{todo.completed}</button> */}
-        <p>{todo.createdAt}</p>
+        <p>{formatDistanceToNow(new Date(todo.createdAt), { addSuffix: true})}</p>
         <span onClick={handleClick}>Delete</span>
     </div>
   )
