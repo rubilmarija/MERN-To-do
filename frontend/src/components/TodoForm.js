@@ -9,6 +9,7 @@ const TodoForm = () => {
     const [description, setDescription] = useState('')
     // const [title, setTitle] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
 
 
     const handleSubmit = async (e) => {
@@ -27,11 +28,13 @@ const TodoForm = () => {
 
         if (!response.ok) {
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if (response.ok) {
             setTitle('')
             setDescription('')
             setError(null)
+            setEmptyFields([])
             console.log('New todo task added', json)
             dispatch({type: 'CREATE_TODO', payload: json})
         }
@@ -46,6 +49,7 @@ const TodoForm = () => {
             type='text'
             onChange={(e) => setTitle(e.target.value)}
             value={title}
+            className={emptyFields.includes('title') ? 'error' : ''}
         />
 
         <label>Description:</label>
