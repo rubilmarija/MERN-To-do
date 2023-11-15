@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+// components
+import TodoDetails from '../components/TodoDetails';
+import TodoForm from "../components/TodoForm";
 
 const Home = () => {
+  const [todos, setTodos] = useState(null);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      // const response = await fetch('http://localhost:4000/api/todos')
+      
+      const response = await fetch('/api/todos')
+
+      const json = await response.json()
+
+      if (response.ok) {
+        setTodos(json)
+      }
+    }
+
+    fetchTodos()
+  }, [])
+
   return (
     <div className="home">
-      <h1>Home</h1>
+      <div className="todos">
+        {todos && todos.map((todo) => (
+          <TodoDetails key={todo._id} todo={todo} />
+        ))}
+      </div>
+      <TodoForm />
     </div>
   );
 };
