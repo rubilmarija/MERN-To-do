@@ -42,9 +42,9 @@ const TodoForm = () => {
 
   return (
     <form className='create' onSubmit={handleSubmit}>
-        <h3>Add new todo task</h3>
+        <h3>Add new task</h3>
 
-        <label>Todo:</label>
+        <label>Task:</label>
         <input
             type='text'
             onChange={(e) => setTitle(e.target.value)}
@@ -59,7 +59,7 @@ const TodoForm = () => {
             value={description}
         />
 
-        <button>Add new todo task</button>
+        <button>Add new task</button>
         {error && <div className='error'>{error}</div>}
     </form>
   )

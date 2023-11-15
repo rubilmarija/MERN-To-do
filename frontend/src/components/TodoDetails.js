@@ -20,7 +20,7 @@ const TodoDetails = ({todo}) => {
   return (
     <div className='todo-details'>
         <h4>{todo.title}</h4>
-        <p>{todo.description}</p>
+        <h5 className='desc'>{todo.description}</h5>
         {/* <button type='radio'>{todo.completed}</button> */}
         <p>{formatDistanceToNow(new Date(todo.createdAt), { addSuffix: true})}</p>
         <span onClick={handleClick}>Delete</span>
